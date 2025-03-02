@@ -76,6 +76,7 @@ android {
     ndkVersion rootProject.ext.ndkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
+    ndkVersion="28.0.13004108"
 
     namespace "com.myapp"
     defaultConfig {
@@ -84,6 +85,19 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+       externalNativeBuild {
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    externalNativeBuild {
+        cmake {
+            arguments "-DANDROID_STL=c++_shared", "-DANDROID_CPP_FEATURES=rtti exceptions"
+        cppFlags "-std=c++17"
+        }
+    }
+}
+
     }
     signingConfigs {
         debug {
