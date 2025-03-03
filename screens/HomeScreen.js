@@ -1,15 +1,18 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import Icon from 'react-native-vector-icons/Ionicons'
+import AllNotesScreen from './AllNotesScreen';
 
 const HomeScreen = () => {
+  const navigation = useNavigation();
   return (
     <View style={styles.container1}>
-      <TouchableOpacity style={styles.opacity1}>
+      <TouchableOpacity style={styles.opacity1} onPress={() => navigation.navigate('AddNote')}>
         <Text style={styles.font}>Add New Notes</Text>
         <Icon style={styles.icons} name="arrow-forward-outline" />
       </TouchableOpacity>
-      <TouchableOpacity style={styles.opacity2}>
+      <TouchableOpacity style={styles.opacity2} onPress={()=> navigation.navigate('AllNotesScreen')}>
         <Text style={styles.font}>View All Notes</Text>
         <Icon style={styles.icons} name="arrow-forward-outline"/>
       </TouchableOpacity>
