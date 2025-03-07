@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     flex: 1,
 justifyContent:'space-evenly',
     alignContent: 'center',
-   
+   backgroundColor:'lightpink'
   },
   opacity1: {
     borderColor: 'black',
@@ -36,7 +36,8 @@ justifyContent:'space-evenly',
     padding: 50,
     marginLeft: 30,
     marginRight:30,
-    elevation:3,
+    elevation:12,
+    backgroundColor:'white'
   },
   opacity2: {
     borderColor: 'black',
@@ -45,7 +46,8 @@ justifyContent:'space-evenly',
     padding: 50,
     marginLeft: 30,
     marginRight:30,
-    elevation:3,
+    elevation:12,
+     backgroundColor:'white'
   },
   font: {
     fontSize: 30,

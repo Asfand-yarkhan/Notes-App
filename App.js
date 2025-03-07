@@ -14,7 +14,7 @@ const App =()=> {
     <NavigationContainer>
       <Header/>
       <Stack.Navigator>
-      <Stack.Screen name='Home' component={HomeScreen}/>
+      <Stack.Screen name='Home' component={HomeScreen} options={{headerShown:false}}/>
       <Stack.Screen name='AddNote' component={AddNote}/>
       <Stack.Screen name='AllNotesScreen' component={AllNotesScreen}/>
     
