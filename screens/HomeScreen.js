@@ -8,11 +8,11 @@ const HomeScreen = () => {
   const navigation = useNavigation();
   return (
     <View style={styles.container1}>
-      <TouchableOpacity style={styles.opacity1} onPress={() => navigation.navigate('AddNote')}>
+      <TouchableOpacity style={styles.opacity1} onPress={() => navigation.navigate('Add Note')}>
         <Text style={styles.font}>Add New Notes</Text>
         <Icon style={styles.icons} name="arrow-forward-outline" />
       </TouchableOpacity>
-      <TouchableOpacity style={styles.opacity2} onPress={()=> navigation.navigate('AllNotesScreen')}>
+      <TouchableOpacity style={styles.opacity2} onPress={()=> navigation.navigate('All Notes')}>
         <Text style={styles.font}>View All Notes</Text>
         <Icon style={styles.icons} name="arrow-forward-outline"/>
       </TouchableOpacity>
