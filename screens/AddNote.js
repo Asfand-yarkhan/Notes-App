@@ -10,23 +10,21 @@ const AddNote = ({ onSave }) => {
     settext(val);
   };
 
-  // ✅ Note save karne ka function (AsyncStorage ka use)
-  const saved = async () => {
-    if (entertext.trim() === "") return; // ✅ Agar empty string ho to return kar do
+  const onSave =async()=>{
+    if (entertext.trim() =="") return ;
+    try{
+      let existingnotes = await AsyncStorage.getItem('notes');
+      existingnotes = existingnotes ? JSON.parse(existingnotes) : [];
 
-    try {
-      let existingNotes = await AsyncStorage.getItem('notes'); // ✅ Pehle se stored notes ko get karo
-      existingNotes = existingNotes ? JSON.parse(existingNotes) : []; // ✅ JSON me convert karo ya empty array set karo
-      
-      existingNotes.push(entertext); // ✅ Naya note list me add karo
+      existingnotes.push(entertext);
 
-      await AsyncStorage.setItem('notes', JSON.stringify(existingNotes)); // ✅ Updated list ko AsyncStorage me save karo
-      console.log("Saved Notes:", existingNotes); // ✅ Debugging ke liye console me print karo
+      await AsyncStorage.setItem('notes' , JSON.stringify(existingnotes));
+      onSave();
+      settext('');
 
-      onSave(entertext); // ✅ Parent screen ko update karne ka signal do
-      settext(''); // ✅ Input field ko empty karo
-    } catch (error) {
-      console.error("Error saving note:", error);
+    }catch(error){
+console.log("error");
+
     }
   };
 
