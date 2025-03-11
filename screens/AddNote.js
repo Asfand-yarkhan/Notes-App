@@ -1,31 +1,17 @@
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 import React, { useState } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage'; // ✅ AsyncStorage import kiya
 
 const AddNote = ({ onSave }) => {
-  const [entertext, settext] = useState(""); // ✅ State to store user input
+  const [entertext, settext] = useState("");
 
-  // ✅ Text ko update karne ka function
   const updation = (val) => {
     settext(val);
   };
 
-  const onSave =async()=>{
-    if (entertext.trim() =="") return ;
-    try{
-      let existingnotes = await AsyncStorage.getItem('notes');
-      existingnotes = existingnotes ? JSON.parse(existingnotes) : [];
-
-      existingnotes.push(entertext);
-
-      await AsyncStorage.setItem('notes' , JSON.stringify(existingnotes));
-      onSave();
-      settext('');
-
-    }catch(error){
-console.log("error");
-
-    }
+  const onSaveNote = () => {
+    if (entertext.trim() == "") return;
+    onSave(entertext);
+    settext('');
   };
 
   return (
@@ -37,14 +23,13 @@ console.log("error");
         value={entertext}
       />
       <View>
-        <TouchableOpacity style={styles.Button} onPress={onSave}>
+        <TouchableOpacity style={styles.Button} onPress={onSaveNote}>
           <Text style={{ fontSize: 20, fontWeight: 'bold' }}>ADD Note</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
 };
-
 
 export default AddNote;
 
@@ -59,8 +44,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#6A5ACD',
-    //  width:'100%',
-    //  height:60,
     padding: 25,
     elevation: 10,
   },
