@@ -16,7 +16,7 @@ const App =()=> {
       <Header/>
       <Stack.Navigator>
       <Stack.Screen name='Home' component={HomeScreen} options={{headerShown:false}}/>
-      <Stack.Screen name='Add Note' component={AddNote} onSave={(data)=>setnotes([...notes,{id:Date.now(),note:data}]) }/>
+      <Stack.Screen name='Add Note' component={AddNote}  />
       <Stack.Screen name='All Notes' component={AllNotesScreen}/>
     
       </Stack.Navigator>

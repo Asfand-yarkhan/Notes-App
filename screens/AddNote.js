@@ -1,30 +1,46 @@
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
-import React, { useState } from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  TouchableOpacity,
+} from 'react-native';
+import React, {useState} from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const AddNote = ({ onSave }) => {
-  const [entertext, settext] = useState("");
+const AddNote = () => {
+  const [entertext, settext] = useState('');
 
-  const updation = (val) => {
-    settext(val);
-  };
 
-  const onSaveNote = () => {
-    if (entertext.trim() == "") return;
-    onSave(entertext);
-    settext('');
+  const onSaveNote = async() => {
+      try {
+        const data = await AsyncStorage.getItem('notes');
+        if (data != null) {
+          const notes = JSON.parse(data);
+          notes.push(entertext);
+          await AsyncStorage.setItem('notes', JSON.stringify(notes));
+          settext('');
+        } else {
+          const notes = [entertext];
+          await AsyncStorage.setItem('notes', JSON.stringify(notes));
+          settext('');
+        }
+      } catch (error) {
+        console.log(error);
+      }
   };
 
   return (
     <View>
       <TextInput
         style={styles.input}
-        onChangeText={updation}
+        onChangeText={settext}
         placeholder="Write Here"
         value={entertext}
       />
       <View>
         <TouchableOpacity style={styles.Button} onPress={onSaveNote}>
-          <Text style={{ fontSize: 20, fontWeight: 'bold' }}>ADD Note</Text>
+          <Text style={{fontSize: 20, fontWeight: 'bold'}}>ADD Note</Text>
         </TouchableOpacity>
       </View>
     </View>
