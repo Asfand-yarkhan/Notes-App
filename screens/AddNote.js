@@ -8,28 +8,22 @@ import {
 import React, {useState} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const AddNote = () => {
+const AddNote = ({addnotes}) => {
+
   const [entertext, settext] = useState('');
 
-
-  const onSaveNote = async() => {
-      try {
-        const data = await AsyncStorage.getItem('notes');
-        if (data != null) {
-          const notes = JSON.parse(data);
-          notes.push(entertext);
-          await AsyncStorage.setItem('notes', JSON.stringify(notes));
-          settext('');
-        } else {
-          const notes = [entertext];
-          await AsyncStorage.setItem('notes', JSON.stringify(notes));
-          settext('');
-        }
-      } catch (error) {
-        console.log(error);
-      }
-  };
-
+  const savingnotes=()=>
+  {
+   if(entertext.length>0)
+   {
+     addnotes(entertext);
+     settext('');
+   }
+   else
+   {
+     alert('Please enter some text');
+   }
+  }
   return (
     <View>
       <TextInput
@@ -39,7 +33,7 @@ const AddNote = () => {
         value={entertext}
       />
       <View>
-        <TouchableOpacity style={styles.Button} onPress={onSaveNote}>
+        <TouchableOpacity style={styles.Button} onPress={savingnotes}>
           <Text style={{fontSize: 20, fontWeight: 'bold'}}>ADD Note</Text>
         </TouchableOpacity>
       </View>
